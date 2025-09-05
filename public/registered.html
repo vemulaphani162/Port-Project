@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Candidates - Portfolio Designing Event</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="/">Portfolio Event</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/registered">Registered</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rounds">Rounds</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="page-title">Registered Candidates</h1>
+                <p class="lead text-light">List of all students registered for the Portfolio Designing Event</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registered Candidates Table -->
+    <section class="py-3">
+        <div class="container">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-warning mb-0">
+                            <i class="bi bi-people-fill me-2"></i>All Registered Students
+                        </h4>
+                        <span class="badge bg-warning text-dark px-3 py-2" id="totalCount">Total: 0</span>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover">
+                            <thead class="table-warning text-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Roll Number</th>
+                                    <th scope="col">Year</th>
+                                    <th scope="col">Section</th>
+                                </tr>
+                            </thead>
+                            <tbody id="registeredTableBody">
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-5">
+                                        <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                                        <p>No registered candidates found. Please check back later or contact admin.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker py-4 mt-5">
+        <div class="container">
+            <div class="text-center">
+                <p class="mb-0 text-light">&copy; 2024 Seshadri Rao Gudlavalleru Engineering College. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load registered candidates
+        async function loadRegisteredCandidates() {
+            try {
+                const response = await fetch('/api/registered');
+                const candidates = await response.json();
+                const tableBody = document.getElementById('registeredTableBody');
+                const totalCount = document.getElementById('totalCount');
+                
+                if (candidates.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-5">
+                                <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                                <p>No registered candidates found. Please check back later or contact admin.</p>
+                            </td>
+                        </tr>
+                    `;
+                    totalCount.textContent = 'Total: 0';
+                    return;
+                }
+                
+                let html = '';
+                candidates.forEach((candidate, index) => {
+                    html += `
+                        <tr class="table-row-hover">
+                            <th scope="row">${index + 1}</th>
+                            <td>${candidate.name || 'N/A'}</td>
+                            <td>${candidate.rollNo || 'N/A'}</td>
+                            <td>${candidate.year || 'N/A'}</td>
+                            <td>${candidate.section || 'N/A'}</td>
+                        </tr>
+                    `;
+                });
+                
+                tableBody.innerHTML = html;
+                totalCount.textContent = `Total: ${candidates.length}`;
+            } catch (error) {
+                console.error('Error loading registered candidates:', error);
+                const tableBody = document.getElementById('registeredTableBody');
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center text-danger py-5">
+                            <i class="bi bi-exclamation-triangle fs-1 d-block mb-3"></i>
+                            <p>Error loading data. Please try again later.</p>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+        
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadRegisteredCandidates);
+    </script>
+</body>
+</html>

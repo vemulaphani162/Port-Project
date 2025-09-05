@@ -1,0 +1,371 @@
+/* Custom CSS for Portfolio Designing Event Website */
+
+:root {
+    --gold-color: #FFD700;
+    --dark-bg: #1a1a1a;
+    --darker-bg: #0f0f0f;
+    --card-bg: #2d2d2d;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg) !important;
+}
+
+/* Custom Background Classes */
+.bg-darker {
+    background-color: var(--darker-bg) !important;
+}
+
+/* Typography */
+.college-name {
+    color: var(--gold-color);
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1px;
+}
+
+.event-title {
+    color: white;
+    font-weight: 800;
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    color: var(--gold-color);
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    color: var(--gold-color);
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Cards */
+.rule-card,
+.benefit-card,
+.coordinator-card {
+    background-color: var(--card-bg);
+    border: 1px solid #404040;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.rule-card:hover,
+.benefit-card:hover,
+.coordinator-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+    border-color: var(--gold-color);
+}
+
+.rule-card .card-body,
+.benefit-card .card-body,
+.coordinator-card .card-body {
+    padding: 2rem;
+}
+
+/* Table Styling */
+.table-dark {
+    --bs-table-bg: var(--card-bg);
+    border: 1px solid #404040;
+}
+
+.table-dark th {
+    border-color: #404040;
+    font-weight: 600;
+}
+
+.table-dark td {
+    border-color: #333;
+}
+
+.table-row-hover:hover {
+    background-color: rgba(255, 215, 0, 0.1) !important;
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+.winner-row {
+    background-color: rgba(255, 215, 0, 0.05) !important;
+}
+
+.winner-row:hover {
+    background-color: rgba(255, 215, 0, 0.15) !important;
+}
+
+/* Navigation */
+.navbar {
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #333;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--gold-color) !important;
+}
+
+.nav-link.active {
+    color: var(--gold-color) !important;
+}
+
+/* Buttons */
+.btn-warning {
+    background-color: var(--gold-color);
+    border-color: var(--gold-color);
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-warning:hover {
+    background-color: #e6c200;
+    border-color: #e6c200;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Form Styling */
+.form-control:focus {
+    border-color: var(--gold-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+}
+
+.form-control {
+    transition: all 0.3s ease;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+/* Cards */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Icons */
+.bi {
+    transition: transform 0.3s ease;
+}
+
+.rule-card:hover .bi,
+.benefit-card:hover .bi {
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-section {
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .college-name {
+        font-size: 1.8rem;
+    }
+    
+    .event-title {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-section {
+        min-height: 50vh;
+    }
+    
+    .rule-card .card-body,
+    .benefit-card .card-body,
+    .coordinator-card .card-body {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .college-name {
+        font-size: 1.5rem;
+    }
+    
+    .event-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+/* Loading States */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Alert Enhancements */
+.alert {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.alert-success {
+    background-color: rgba(25, 135, 84, 0.2);
+    border-left: 4px solid #198754;
+    color: #75b798;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-left: 4px solid #dc3545;
+    color: #f1aeb5;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-color);
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid #333;
+}
+
+/* Progress Steps */
+.progress-step {
+    position: relative;
+    padding: 1rem;
+}
+
+.step-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Statistics Cards */
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.stat-card h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Qualified Row Styling */
+.qualified-row {
+    background-color: rgba(25, 135, 84, 0.05) !important;
+}
+
+.qualified-row:hover {
+    background-color: rgba(25, 135, 84, 0.15) !important;
+}
+
+/* Login Page Styling */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2) !important;
+}
+
+/* Input Group Styling */
+.input-group .form-control:focus {
+    border-color: var(--gold-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
+}
+
+.input-group .btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: var(--gold-color);
+    border-color: var(--gold-color);
+    color: #000;
+}
