@@ -57,12 +57,6 @@ function checkSession(req, res, next) {
 }
 
 // -------------------- DATA HANDLING --------------------
-let latestUploads = {
-  registered: null,
-  round1: null,
-  winners: null,
-};
-
 // Function to read and parse Excel to JSON for the frontend
 function getExcelData(filePath) {
   if (!filePath || !fs.existsSync(filePath)) {
@@ -93,7 +87,17 @@ const storage = multer.diskStorage({
     cb(null, "uploads/"); // save files in "uploads" folder
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
+    let targetFilename;
+    if (file.fieldname === 'registeredFile') {
+      targetFilename = 'registered.xlsx';
+    } else if (file.fieldname === 'round1File') {
+      targetFilename = 'round1.xlsx';
+    } else if (file.fieldname === 'winnersFile') {
+      targetFilename = 'winners.xlsx';
+    } else {
+      targetFilename = Date.now() + path.extname(file.originalname); // Fallback
+    }
+    cb(null, targetFilename);
   },
 });
 
@@ -121,7 +125,6 @@ app.post(
         return res.status(400).json({ success: false, message: "No file was uploaded." });
       }
       const count = processExcel(req.file.path);
-      latestUploads.registered = req.file.path;
       res.json({ success: true, count });
     } catch (err) {
       console.error("Upload registered error:", err);
@@ -141,7 +144,6 @@ app.post(
         return res.status(400).json({ success: false, message: "No file was uploaded." });
       }
       const count = processExcel(req.file.path);
-      latestUploads.round1 = req.file.path;
       res.json({ success: true, count });
     } catch (err) {
       console.error("Upload round1 error:", err);
@@ -161,7 +163,6 @@ app.post(
         return res.status(400).json({ success: false, message: "No file was uploaded." });
       }
       const count = processExcel(req.file.path);
-      latestUploads.winners = req.file.path;
       res.json({ success: true, count });
     } catch (err) {
       console.error("Upload winners error:", err);
@@ -172,17 +173,20 @@ app.post(
 
 // -------------------- API ROUTES FOR DATA --------------------
 app.get('/api/registered', (req, res) => {
-    const data = getExcelData('/uploads/registered.xlsx');
+    const filePath = path.join(__dirname, 'uploads', 'registered.xlsx');
+    const data = getExcelData(filePath);
     res.json(data);
 });
 
 app.get('/api/round1', (req, res) => {
-    const data = getExcelData('/uploads/round1.xlsx');
+    const filePath = path.join(__dirname, 'uploads', 'round1.xlsx');
+    const data = getExcelData(filePath);
     res.json(data);
 });
 
 app.get('/api/winners', (req, res) => {
-    const data = getExcelData('/uploads/winners.xlsx');
+    const filePath = path.join(__dirname, 'uploads', 'winners.xlsx');
+    const data = getExcelData(filePath);
     res.json(data);
 });
 
