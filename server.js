@@ -172,17 +172,17 @@ app.post(
 
 // -------------------- API ROUTES FOR DATA --------------------
 app.get('/api/registered', (req, res) => {
-    const data = getExcelData(latestUploads.registered);
+    const data = getExcelData('/uploads/registered.xlsx');
     res.json(data);
 });
 
 app.get('/api/round1', (req, res) => {
-    const data = getExcelData(latestUploads.round1);
+    const data = getExcelData('/uploads/round1.xlsx');
     res.json(data);
 });
 
 app.get('/api/winners', (req, res) => {
-    const data = getExcelData(latestUploads.winners);
+    const data = getExcelData('/uploads/winners.xlsx');
     res.json(data);
 });
 
